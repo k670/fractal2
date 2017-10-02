@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="http://d3js.org/d3.v3.min.js"> </script>
+        <style>
+        svg line{
+            stroke: grey;
+            stroke-width: 2;
+        }
+
+
+</style>
+    </head>
+
+    <body>
+
+        <script type="text/javascript">
+
+                    var width = 1620,
+                        height = 905,
+                        clitunka = 5;
+
+                    var svg = d3.select("body").append("svg");
+
+                    svg.attr("height", height)
+                        .attr("width", width);
+
+                    var a = {
+                        x: 0,
+                        y: 0
+                    }
+                    var b = {
+                        x: width,
+                        y: 0
+                    }
+                    svg.append("rect")
+                        .attr("x1", a.x)
+                        .attr("y1", a.y)
+                        .attr("width", width)
+                        .attr("height", height);
+                    /*
+                for(var i = 0;i<=height;i+=clitunka){
+
+                    svg.append("line")
+                    .attr("x1", a.x)
+                    .attr("y1", a.y)
+                    .attr("x2", b.x)
+                    .attr("y2", b.y);
+                    a.y +=clitunka;
+                    b.y +=clitunka;
+
+                }
+                a.x = 0;
+                a.y = 0;
+                b.x = 0;
+                b.y = height;
+
+                for(var i = 0;i<=width;i+=clitunka){
+
+                    svg.append("line")
+                    .attr("x1", a.x)
+                    .attr("y1", a.y)
+                    .attr("x2", b.x)
+                    .attr("y2", b.y);
+                    a.x +=clitunka;
+                    b.x +=clitunka;
+
+                }
+                */
+                a.x = 0;
+                a.y = 0;
+                b.x = 0;
+                b.y = 0;
+                var
+                    up = false
+                ;
+                var left = false;
+                var isDrawed = false;
+                function isEnd(zx,zy,
+                               tx,ty) {
+                    if(((zx == 0)||(zx == width))&& ((zy == 0) ||(zy == height))){
+                        return true;
+                    }
+                    return false;
+                };
+                    var start=true;
+
+                while ((!(isEnd
+
+                (b.x,b.y))) || start) {
+                    start= false;
+
+                    switch(b.x) {
+                        case 0:
+                            left = false;
+                            break;
+
+                        case width:
+                            left = true;
+                            break;
+                }
+                    switch(b.y) {
+                        case 0:
+                    up = false;
+                            break;
+
+                        case height:
+                    up = true;
+                            break;
+                }
+                    a.x = b.x;
+                    a.y = b.y;
+
+                    if(left){
+                        b.x-=clitunka;
+                    }else{
+                        b.x+=clitunka;
+                    }
+                    if(up) {
+                        b.y -= clitunka;
+                    }else{
+                        b.y += clitunka;
+                    }
+
+                    isDrawed=!isDrawed;
+                    if(isDrawed){
+                        svg.append("line")
+                        .attr("x1", a.x)
+                        .attr("y1", a.y)
+                        .attr("x2", b.x)
+                        .attr("y2", b.y);
+
+                    }
+
+                }
+
+
+        </script>
+
+    </body>
+</html>
